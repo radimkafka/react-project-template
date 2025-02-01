@@ -13,6 +13,7 @@ import {
   SidebarMenuSubButton,
   SidebarMenuSubItem,
 } from "@/components/ui/sidebar";
+import { Link } from "@tanstack/react-router";
 
 export function NavMain({
   items,
@@ -30,6 +31,12 @@ export function NavMain({
 }) {
   return (
     <SidebarGroup>
+      <Link to="/">
+        <SidebarMenuButton>Home</SidebarMenuButton>
+      </Link>
+      <Link to="/about">
+        <SidebarMenuButton>About</SidebarMenuButton>
+      </Link>
       <SidebarGroupLabel>Platform</SidebarGroupLabel>
       <SidebarMenu>
         {items.map((item) => (

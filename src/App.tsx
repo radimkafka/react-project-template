@@ -1,5 +1,6 @@
 import { RouterProvider, createRouter } from "@tanstack/react-router";
 
+import { ThemeProvider } from "./components/theme-provider";
 // Import the generated route tree
 import { routeTree } from "./routeTree.gen";
 
@@ -14,7 +15,11 @@ declare module "@tanstack/react-router" {
 }
 
 function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <ThemeProvider>
+      <RouterProvider router={router} />
+    </ThemeProvider>
+  );
 }
 
 export default App;
