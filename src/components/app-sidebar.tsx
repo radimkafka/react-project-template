@@ -1,4 +1,3 @@
-import * as React from "react";
 import {
   AudioWaveform,
   BookOpen,
@@ -6,11 +5,13 @@ import {
   Command,
   Frame,
   GalleryVerticalEnd,
+  // biome-ignore lint/suspicious/noShadowRestrictedNames: <explanation>
   Map,
   PieChart,
   Settings2,
   SquareTerminal,
 } from "lucide-react";
+import type * as React from "react";
 
 import { NavMain } from "@/components/nav-main";
 import { NavProjects } from "@/components/nav-projects";
