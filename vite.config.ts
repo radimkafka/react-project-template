@@ -8,9 +8,7 @@ import checker from "vite-plugin-checker";
 export default defineConfig({
   plugins: [
     TanStackRouterVite({ autoCodeSplitting: true }),
-    // @ts-expect-error
     react(),
-    // @ts-expect-error
     checker({
       typescript: { tsconfigPath: "./tsconfig.app.json" },
       biome: {
