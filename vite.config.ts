@@ -6,6 +6,7 @@ import checker from "vite-plugin-checker";
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [
+    // @ts-expect-error
     TanStackRouterVite({ autoCodeSplitting: true }),
     react(),
     checker({
