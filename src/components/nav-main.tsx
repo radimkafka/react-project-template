@@ -13,21 +13,24 @@ import {
   SidebarMenuSubButton,
   SidebarMenuSubItem,
 } from "@/components/ui/sidebar";
+import type { LinkTo } from "@/types";
 import { Link } from "@tanstack/react-router";
+
+export type NavMainItems = {
+  title: string;
+  url: string;
+  icon?: LucideIcon;
+  isActive?: boolean;
+  items?: {
+    title: string;
+    url: LinkTo;
+  }[];
+};
 
 export function NavMain({
   items,
 }: {
-  items: {
-    title: string;
-    url: string;
-    icon?: LucideIcon;
-    isActive?: boolean;
-    items?: {
-      title: string;
-      url: string;
-    }[];
-  }[];
+  items: NavMainItems[];
 }) {
   return (
     <SidebarGroup>
@@ -54,9 +57,9 @@ export function NavMain({
                   {item.items?.map((subItem) => (
                     <SidebarMenuSubItem key={subItem.title}>
                       <SidebarMenuSubButton asChild>
-                        <a href={subItem.url}>
+                        <Link to={subItem.url}>
                           <span>{subItem.title}</span>
-                        </a>
+                        </Link>
                       </SidebarMenuSubButton>
                     </SidebarMenuSubItem>
                   ))}

@@ -1,7 +1,7 @@
 import { AudioWaveform, Command, GalleryVerticalEnd, SquareTerminal } from "lucide-react";
 import type * as React from "react";
 
-import { NavMain } from "@/components/nav-main";
+import { NavMain, type NavMainItems } from "@/components/nav-main";
 import { NavUser } from "@/components/nav-user";
 import { TeamSwitcher } from "@/components/team-switcher";
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarRail } from "@/components/ui/sidebar";
@@ -38,20 +38,12 @@ const data = {
       isActive: true,
       items: [
         {
-          title: "History",
-          url: "#",
-        },
-        {
-          title: "Starred",
-          url: "#",
-        },
-        {
-          title: "Settings",
-          url: "#",
+          title: "About",
+          url: "/about",
         },
       ],
     },
-  ],
+  ] satisfies NavMainItems[],
 };
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {

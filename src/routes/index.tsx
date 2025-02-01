@@ -1,7 +1,11 @@
+import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/")({
   component: Index,
+  loader: () => ({
+    crumb: "home",
+  }),
 });
 
 function Index() {
