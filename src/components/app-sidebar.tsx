@@ -6,7 +6,6 @@ import { NavUser } from "@/components/nav-user";
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarRail } from "@/components/ui/sidebar";
 import { useTranslation } from "react-i18next";
 
-// This is sample data.
 const data = {
   user: {
     name: "shadcn",
