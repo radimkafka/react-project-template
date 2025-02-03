@@ -13,6 +13,8 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { SidebarMenu, SidebarMenuButton, SidebarMenuItem, useSidebar } from "@/components/ui/sidebar";
+import { useTranslation } from "react-i18next";
+import { LanguageToggle } from "./language-toggle";
 import { ModeToggle } from "./mode-toggle";
 
 export function NavUser({
@@ -24,6 +26,7 @@ export function NavUser({
     avatar: string;
   };
 }) {
+  const { t, i18n } = useTranslation();
   const { isMobile } = useSidebar();
 
   return (
@@ -67,6 +70,7 @@ export function NavUser({
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
               <ModeToggle />
+              <LanguageToggle />
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
             <DropdownMenuItem>
