@@ -36,9 +36,9 @@ jobs:
           node-version: 20
           cache: "npm"
       - name: Install dependencies
-        run: npm install
+        run: pnpm i
       - name: Build
-        run: npm run build
+        run: pnpm build
       - name: Create404
         run: cp ./dist/index.html ./dist/404.html
       - name: Setup Pages
