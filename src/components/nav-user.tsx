@@ -1,6 +1,6 @@
 "use client";
 
-import { BadgeCheck, ChevronsUpDown, LogOut, Sparkles } from "lucide-react";
+import { ChevronsUpDown, LogOut } from "lucide-react";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
@@ -13,7 +13,6 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { SidebarMenu, SidebarMenuButton, SidebarMenuItem, useSidebar } from "@/components/ui/sidebar";
-import { useTranslation } from "react-i18next";
 import { LanguageToggle } from "./language-toggle";
 import { ModeToggle } from "./mode-toggle";
 
@@ -26,7 +25,6 @@ export function NavUser({
     avatar: string;
   };
 }) {
-  const { t, i18n } = useTranslation();
   const { isMobile } = useSidebar();
 
   return (

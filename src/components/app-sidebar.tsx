@@ -1,10 +1,10 @@
-import { AudioWaveform, Command, GalleryVerticalEnd, SquareTerminal } from "lucide-react";
+import { Rocket, SquareTerminal } from "lucide-react";
 import type * as React from "react";
 
 import { NavMain, type NavMainItems } from "@/components/nav-main";
 import { NavUser } from "@/components/nav-user";
-import { TeamSwitcher } from "@/components/team-switcher";
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarRail } from "@/components/ui/sidebar";
+import { useTranslation } from "react-i18next";
 
 // This is sample data.
 const data = {
@@ -13,33 +13,16 @@ const data = {
     email: "m@example.com",
     avatar: "/avatars/shadcn.jpg",
   },
-  teams: [
-    {
-      name: "Acme Inc",
-      logo: GalleryVerticalEnd,
-      plan: "Enterprise",
-    },
-    {
-      name: "Acme Corp.",
-      logo: AudioWaveform,
-      plan: "Startup",
-    },
-    {
-      name: "Evil Corp.",
-      logo: Command,
-      plan: "Free",
-    },
-  ],
   navMain: [
     {
-      title: "Playground",
+      title: "FoldableSection",
       url: "#",
       icon: SquareTerminal,
       isActive: true,
       items: [
         {
-          title: "About",
-          url: "/about",
+          title: "Home",
+          url: "/",
         },
       ],
     },
@@ -47,10 +30,18 @@ const data = {
 };
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+  const { t } = useTranslation();
   return (
     <Sidebar collapsible="icon" {...props}>
       <SidebarHeader>
-        <TeamSwitcher teams={data.teams} />
+        <div className="ga flex data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground ">
+          <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
+            <Rocket className="size-4" />
+          </div>
+          <div className="grid flex-1 text-left text-sm leading-tight">
+            <span className="truncate font-semibold">{t("AppName")}</span>
+          </div>
+        </div>
       </SidebarHeader>
       <SidebarContent>
         <NavMain items={data.navMain} />

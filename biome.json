@@ -23,7 +23,8 @@
       "recommended": true,
       "style": {
         "useImportType": "warn"
-      }
+      },
+      "nursery": { "useSortedClasses": "warn" }
     }
   },
   "javascript": {

@@ -37,9 +37,6 @@ export function NavMain({
       <Link to="/">
         <SidebarMenuButton>Home</SidebarMenuButton>
       </Link>
-      <Link to="/about">
-        <SidebarMenuButton>About</SidebarMenuButton>
-      </Link>
       <SidebarGroupLabel>Platform</SidebarGroupLabel>
       <SidebarMenu>
         {items.map((item) => (

@@ -12,10 +12,12 @@ const BreadcrumbsNavigation = () => {
   return (
     <Breadcrumb>
       <BreadcrumbList>
-        {matchesWithCrumbs.map((match) => (
+        {matchesWithCrumbs.map((match, i) => (
           <BreadcrumbItem key={match.fullPath}>
             <BreadcrumbLink asChild>
-              <Link from={match.fullPath}>{t(match.context?.crumbs, { defaultValue: match.context?.crumbs })}</Link>
+              <Link disabled={i === matchesWithCrumbs.length - 1} from={match.fullPath}>
+                {t(match.context?.crumbs, { defaultValue: match.context?.crumbs })}
+              </Link>
             </BreadcrumbLink>
           </BreadcrumbItem>
         ))}
