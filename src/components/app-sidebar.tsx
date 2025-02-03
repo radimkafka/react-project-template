@@ -15,6 +15,10 @@ const data = {
   },
   navMain: [
     {
+      title: "Home",
+      url: "/",
+    },
+    {
       title: "FoldableSection",
       url: "#",
       icon: SquareTerminal,
@@ -34,7 +38,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
     <Sidebar collapsible="icon" {...props}>
       <SidebarHeader>
-        <div className="ga flex data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground ">
+        <div className="ga flex gap-2 p-2 data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground ">
           <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
             <Rocket className="size-4" />
           </div>

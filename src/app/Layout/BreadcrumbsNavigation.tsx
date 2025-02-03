@@ -5,10 +5,9 @@ import { useTranslation } from "react-i18next";
 const BreadcrumbsNavigation = () => {
   const { t } = useTranslation();
   const matches = useMatches();
-  console.log("matches: ", matches);
   if (matches.some((match) => match.status === "pending")) return null;
-  const matchesWithCrumbs = matches.filter((match) => isMatch(match, "context.crumbs"));
 
+  const matchesWithCrumbs = matches.filter((match) => isMatch(match, "context.crumbs"));
   return (
     <Breadcrumb>
       <BreadcrumbList>
