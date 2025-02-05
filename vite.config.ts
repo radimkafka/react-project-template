@@ -5,7 +5,7 @@ import { defineConfig } from "vite";
 import checker from "vite-plugin-checker";
 
 // https://vite.dev/config/
-export default defineConfig({
+export default defineConfig(({ command }) => ({
   plugins: [
     TanStackRouterVite({ autoCodeSplitting: true }),
     react(),
@@ -16,9 +16,10 @@ export default defineConfig({
       },
     }),
   ],
+  base: command === "build" ? "/react-project-template/" : undefined,
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
     },
   },
-});
+}));
