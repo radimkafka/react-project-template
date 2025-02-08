@@ -421,8 +421,17 @@ export const getI = (i: string, plot?: string, r?: string, callback?: string, op
     return apiGet(`${getApiUrl()}${getIPath()}`, options, queryParams) as Promise<GetIFetchResponse>;
 }
 
+
+export type MovieInfo = {
+  Poster: string;
+  Title: string;
+  Type: string;
+  Year: string;
+  imdbID: string;
+};
+
 export type GetSFetchResponse = 
-| FetchResponse<void, 200> 
+| FetchResponse<MovieInfo[], 200> 
 | FetchResponse<void, 401> 
 | ErrorResponse;
 
