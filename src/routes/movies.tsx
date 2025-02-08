@@ -13,11 +13,12 @@ export const Route = createFileRoute("/movies")({
 
 function RouteComponent() {
   const [filter, setFilter] = useState({
-    title: "",
+    title: "batman",
     type: undefined as RecordType | undefined,
     year: undefined as string | undefined,
   });
   const { data } = useMoviesQuery(filter.title, parseNumber(filter.year), filter.type);
+  console.log("data: ", data);
 
   return (
     <div className="space-y-4">
@@ -36,9 +37,10 @@ function RouteComponent() {
           </SelectTrigger>
           <SelectContent>
             <SelectItem value="all">All Types</SelectItem>
-            <SelectItem value="movie">Movie</SelectItem>
-            <SelectItem value="series">Series</SelectItem>
-            <SelectItem value="episode">Episode</SelectItem>
+            <SelectItem value={"movie" as RecordType}>Movie</SelectItem>
+            <SelectItem value={"series" as RecordType}>Series</SelectItem>
+            <SelectItem value={"episode" as RecordType}>Episode</SelectItem>
+            <SelectItem value={"game" as RecordType}>Game</SelectItem>
           </SelectContent>
         </Select>
         <Input
@@ -60,7 +62,7 @@ function RouteComponent() {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {(data ?? []).map((movie) => (
+          {(data?.Search ?? []).map((movie) => (
             <TableRow key={movie.imdbID}>
               <TableCell>
                 <img src={movie.Poster || "/placeholder.svg"} alt={movie.Title} className="h-24 w-16 object-cover" />
