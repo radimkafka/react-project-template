@@ -14,7 +14,8 @@
       "tsconfig.app.json",
       "src/routeTree.gen.ts",
       ".git",
-      "src/api/Api.ts"
+      "src/api/Api.ts",
+      "dist/*"
     ]
   },
   "formatter": {

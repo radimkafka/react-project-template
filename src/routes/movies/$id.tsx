@@ -2,9 +2,9 @@ import { movieQueryOptions } from "@/api/movies/queries/useMovieDetailQuery";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { useQuery, useQueryErrorResetBoundary, useSuspenseQuery } from "@tanstack/react-query";
+import { useQueryErrorResetBoundary, useSuspenseQuery } from "@tanstack/react-query";
 import { type ErrorComponentProps, createFileRoute, useRouter } from "@tanstack/react-router";
-import { StarIcon } from "lucide-react";
+import { Loader2, StarIcon } from "lucide-react";
 import { useEffect } from "react";
 
 export const Route = createFileRoute("/movies/$id")({
@@ -16,7 +16,7 @@ export const Route = createFileRoute("/movies/$id")({
   loader: ({ context: { queryClient }, params: { id } }) => {
     return queryClient.ensureQueryData(movieQueryOptions(id));
   },
-  pendingComponent: () => <div>Loading...</div>,
+  pendingComponent: () => <Loader2 className="animate-spin" />,
 });
 
 export function ErrorComponent({ error }: ErrorComponentProps) {
