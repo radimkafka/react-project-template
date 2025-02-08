@@ -16,6 +16,9 @@ concurrency:
   group: "pages"
   cancel-in-progress: true
 
+env:
+  VITE_API_KEY: ${{ secrets.VITE_API_KEY }}
+
 jobs:
   deploy:
     environment:
