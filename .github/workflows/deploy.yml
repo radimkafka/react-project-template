@@ -37,6 +37,9 @@ jobs:
           cache: "pnpm"
       - name: Install dependencies
         run: pnpm i
+      - name: env setup
+        run: | 
+          export VITE_API_KEY=${{secrets.VITE_API_KEY}} 
       - name: Build
         run: pnpm build
       - name: Create404
