@@ -3,36 +3,56 @@ import { type RecordType, isRecordType } from "@/api/types";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { parseNumber } from "@/utils/number";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
+import { debounce } from "underscore";
+import { z } from "zod";
+
+const searchSchema = z.object({
+  title: z.string().optional(),
+  year: z.coerce.number().min(1900).optional(),
+  type: z.enum(["movie", "series", "episode", "game"]).optional(),
+});
 
 export const Route = createFileRoute("/movies/")({
   component: RouteComponent,
-  // context: () => ({
-  //   crumb: undefined,
-  // }),
+  validateSearch: searchSchema,
 });
 
 function RouteComponent() {
   const navigate = useNavigate({ from: "/movies/" });
-  const [filter, setFilter] = useState({
-    title: "batman",
-    type: undefined as RecordType | undefined,
-    year: undefined as string | undefined,
-  });
-  const { data } = useMoviesQuery(filter.title, parseNumber(filter.year), filter.type);
+  const { title, type, year } = Route.useSearch();
+  const [filter, setFilter] = useState({ title, type, year: year?.toString() });
+  const { data } = useMoviesQuery(title, year, type);
+
+  const setParams = useCallback(
+    debounce((data: typeof filter) => {
+      console.log("data: ", data);
+      const parsed = searchSchema.safeParse(data);
+      console.log("parsed: ", parsed);
+      if (!parsed.success) return;
+
+      navigate({
+        search: parsed.data,
+      });
+    }, 1000),
+    [],
+  );
+
+  useEffect(() => {
+    setParams(filter);
+  }, [setParams, filter]);
 
   return (
     <div className="space-y-4">
       <div className="grid grid-cols-1 gap-4 md:grid-cols-4">
         <Input
           placeholder="Search by title"
-          value={filter.title}
+          value={filter.title ?? ""}
           onChange={(e) => setFilter((a) => ({ ...a, title: e.target.value }))}
         />
         <Select
-          value={filter.type}
+          value={filter.type ?? ""}
           onValueChange={(value) =>
             setFilter((a) => ({
               ...a,
@@ -54,7 +74,7 @@ function RouteComponent() {
         <Input
           type="number"
           placeholder="Year from"
-          value={filter.year}
+          value={filter.year ?? ""}
           onChange={(e) => setFilter((a) => ({ ...a, year: e.target.value }))}
         />
       </div>

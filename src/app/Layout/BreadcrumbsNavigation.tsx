@@ -13,10 +13,6 @@ const BreadcrumbsNavigation = () => {
   const { t } = useTranslation();
   const matches = useMatches();
 
-  console.log(
-    'matches.some((match) => match.status === "pending"): ',
-    matches.some((match) => match.status === "pending"),
-  );
   if (matches.some((match) => match.status === "pending")) return null;
 
   const matchesWithCrumbs = matches.filter((match) => isMatch(match, "loaderData.crumb"));
