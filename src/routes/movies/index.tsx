@@ -27,9 +27,7 @@ function RouteComponent() {
 
   const setParams = useCallback(
     debounce((data: typeof filter) => {
-      console.log("data: ", data);
       const parsed = searchSchema.safeParse(data);
-      console.log("parsed: ", parsed);
       if (!parsed.success) return;
 
       navigate({

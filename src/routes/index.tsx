@@ -1,16 +1,12 @@
-import useMoviesQuery from "@/api/movies/queries/useMoviesQuery";
+import { createCrumbLoaderData } from "@/utils/router";
 import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/")({
   component: Index,
-  context: () => ({
-    crumb: "home",
-  }),
+  loader: () => ({ crumb: "Home" }),
 });
 
 function Index() {
-  const { data } = useMoviesQuery("batman");
-  console.log("data: ", data);
   return (
     <div className="p-2">
       <h3>Welcome Home!</h3>
