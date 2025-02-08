@@ -3,12 +3,36 @@ import { ThemeProvider } from "./components/theme-provider";
 import { routeTree } from "./routeTree.gen";
 import "./translations/i18n";
 import { MutationCache, QueryCache, QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { useEffect, useState } from "react";
 import { Toaster } from "sonner";
-import { getS, getT, setupClient } from "./api/Api";
+import { setupClient } from "./api/Api";
 import { handleResponseError } from "./api/apiUtils";
 
-const router = createRouter({ routeTree });
+const queryClient = new QueryClient({
+  queryCache: new QueryCache({
+    onError: handleResponseError,
+  }),
+  mutationCache: new MutationCache({
+    onError: handleResponseError,
+  }),
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false,
+    },
+  },
+});
+
+// Set up a Router instance
+const router = createRouter({
+  routeTree,
+  context: {
+    queryClient,
+  },
+  defaultPreload: "intent",
+  // Since we're using React Query, we don't want loader calls to ever be stale
+  // This will ensure that the loader is always called when the route is preloaded or visited
+  defaultPreloadStaleTime: 0,
+  scrollRestoration: true,
+});
 
 declare module "@tanstack/react-router" {
   interface Register {
@@ -17,23 +41,6 @@ declare module "@tanstack/react-router" {
 }
 
 function App() {
-  const [queryClient] = useState(
-    () =>
-      new QueryClient({
-        queryCache: new QueryCache({
-          onError: handleResponseError,
-        }),
-        mutationCache: new MutationCache({
-          onError: handleResponseError,
-        }),
-        defaultOptions: {
-          queries: {
-            refetchOnWindowFocus: false,
-          },
-        },
-      }),
-  );
-
   setupClient({
     apiUrl: `${import.meta.env.VITE_API_URL}`,
     jwtKey: undefined,
@@ -42,7 +49,7 @@ function App() {
         name: "apikey",
         fn: (req) => {
           // hack to make omdbapi work
-          req.url = req.url.replace("s?", `apikey=${import.meta.env.VITE_API_KEY}&`);
+          req.url = req.url.replace(/(i|s)\?/, `apikey=${import.meta.env.VITE_API_KEY}&`);
           req.options.headers = {};
           return req;
         },

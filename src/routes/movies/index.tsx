@@ -4,21 +4,24 @@ import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { parseNumber } from "@/utils/number";
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 
-export const Route = createFileRoute("/movies")({
+export const Route = createFileRoute("/movies/")({
   component: RouteComponent,
+  context: () => ({
+    crumbs: "movies",
+  }),
 });
 
 function RouteComponent() {
+  const navigate = useNavigate({ from: "/movies" });
   const [filter, setFilter] = useState({
     title: "batman",
     type: undefined as RecordType | undefined,
     year: undefined as string | undefined,
   });
   const { data } = useMoviesQuery(filter.title, parseNumber(filter.year), filter.type);
-  console.log("data: ", data);
 
   return (
     <div className="space-y-4">
@@ -30,7 +33,12 @@ function RouteComponent() {
         />
         <Select
           value={filter.type}
-          onValueChange={(value) => setFilter((a) => ({ ...a, type: isRecordType(value) ? value : undefined }))}
+          onValueChange={(value) =>
+            setFilter((a) => ({
+              ...a,
+              type: isRecordType(value) ? value : undefined,
+            }))
+          }
         >
           <SelectTrigger>
             <SelectValue placeholder="Select type" />
@@ -63,7 +71,11 @@ function RouteComponent() {
         </TableHeader>
         <TableBody>
           {(data?.Search ?? []).map((movie) => (
-            <TableRow key={movie.imdbID}>
+            <TableRow
+              key={movie.imdbID}
+              onClick={() => navigate({ to: "$id", params: { id: movie.imdbID } })}
+              className="cursor-pointer"
+            >
               <TableCell>
                 <img src={movie.Poster || "/placeholder.svg"} alt={movie.Title} className="h-24 w-16 object-cover" />
               </TableCell>

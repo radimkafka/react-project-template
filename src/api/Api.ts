@@ -430,7 +430,6 @@ export type MovieInfo = {
   imdbID: string;
 };
 
-
 export type GetSFetchResponse =
   | FetchResponse<{
     Response: "True"
