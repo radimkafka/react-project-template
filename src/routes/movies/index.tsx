@@ -66,7 +66,6 @@ function RouteComponent() {
             <TableHead>Title</TableHead>
             <TableHead>Type</TableHead>
             <TableHead>Year</TableHead>
-            <TableHead>IMDB ID</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -82,7 +81,6 @@ function RouteComponent() {
               <TableCell>{movie.Title}</TableCell>
               <TableCell>{movie.Type}</TableCell>
               <TableCell>{movie.Year}</TableCell>
-              <TableCell>{movie.imdbID}</TableCell>
             </TableRow>
           ))}
         </TableBody>
