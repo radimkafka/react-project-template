@@ -1,7 +1,7 @@
 import { getS } from "@/api/Api";
 import { processResponseQuery } from "@/api/apiUtils";
 import { useQuery } from "@tanstack/react-query";
-import { GetMoviesResult, type RecordType } from "../../types";
+import type { RecordType } from "../../types";
 import { movieKeys } from "../keys";
 
 const useMoviesQuery = (searchText?: string, year?: number, type?: RecordType, page?: number) =>

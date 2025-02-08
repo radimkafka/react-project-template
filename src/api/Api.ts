@@ -403,8 +403,41 @@ export const getT = (t: string, y?: number, type?: string, plot?: string, r?: st
   return apiGet(`${getApiUrl()}${getTPath()}`, options, queryParams) as Promise<GetTFetchResponse>;
 }
 
+export type Movie = {
+  Title: string;
+  Year: string;
+  Rated: string;
+  Released: string;
+  Runtime: string;
+  Genre: string;
+  Director: string;
+  Writer: string;
+  Actors: string;
+  Plot: string;
+  Language: string;
+  Country: string;
+  Awards: string;
+  Poster: string;
+  Ratings: MovieRating[];
+  Metascore: string;
+  imdbRating: string;
+  imdbVotes: string;
+  imdbID: string;
+  Type: string;
+  DVD: string;
+  BoxOffice: string;
+  Production: string;
+  Website: string;
+  Response: string;
+};
+
+export type MovieRating = {
+  Source: string;
+  Value: string;
+};
+
 export type GetIFetchResponse =
-  | FetchResponse<void, 200>
+  | FetchResponse<Movie, 200>
   | FetchResponse<void, 401>
   | ErrorResponse;
 
@@ -430,12 +463,15 @@ export type MovieInfo = {
   imdbID: string;
 };
 
+
+export type GetMoviesResult = {
+  totalResults: string;
+  Search: MovieInfo[];  
+    Response: string;
+};
+
 export type GetSFetchResponse =
-  | FetchResponse<{
-    Response: "True"
-    Search: MovieInfo[]
-    totalResults: string
-  }, 200>
+  | FetchResponse<GetMoviesResult, 200>
   | FetchResponse<void, 401>
   | ErrorResponse;
 
