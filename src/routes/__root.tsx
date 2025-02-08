@@ -1,24 +1,16 @@
 import Layout from "@/app/Layout";
-import { createRootRoute } from "@tanstack/react-router";
-import { TanStackRouterDevtools } from "@tanstack/router-devtools";
+import TanstackDevtools from "@/components/tanstack-devtools";
+import type { QueryClient } from "@tanstack/react-query";
+import { createRootRouteWithContext } from "@tanstack/react-router";
 import { Suspense, lazy } from "react";
 
-export const Route = createRootRoute({
+export const Route = createRootRouteWithContext<{
+  queryClient: QueryClient;
+}>()({
   component: () => (
     <>
       <Layout />
-      <Suspense>
-        <Devtool position="top-right" />
-      </Suspense>
+      <TanstackDevtools />
     </>
   ),
 });
-
-const Devtool =
-  process.env.NODE_ENV === "production"
-    ? () => null
-    : lazy(() =>
-        import("@tanstack/router-devtools").then((res) => ({
-          default: res.TanStackRouterDevtools,
-        })),
-      );

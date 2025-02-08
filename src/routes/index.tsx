@@ -1,10 +1,9 @@
+import { createCrumbLoaderData } from "@/utils/router";
 import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/")({
   component: Index,
-  context: () => ({
-    crumbs: "home",
-  }),
+  loader: () => ({ crumb: "Home" }),
 });
 
 function Index() {

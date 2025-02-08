@@ -13,16 +13,17 @@ import {
   SidebarMenuSubButton,
   SidebarMenuSubItem,
 } from "@/components/ui/sidebar";
-import type { LinkTo } from "@/types";
+import type { LinkTo, Translations } from "@/types";
 import { Link } from "@tanstack/react-router";
+import { useTranslation } from "react-i18next";
 
 export type NavMainItems = {
-  title: string;
+  title: Translations | string;
   url: string;
   icon?: LucideIcon;
   isActive?: boolean;
   items?: {
-    title: string;
+    title: Translations | string;
     url: LinkTo;
   }[];
 };
@@ -32,6 +33,7 @@ export function NavMain({
 }: {
   items: NavMainItems[];
 }) {
+  const { t } = useTranslation();
   return (
     <SidebarGroup>
       <SidebarMenu>
@@ -39,12 +41,14 @@ export function NavMain({
           <Collapsible key={item.title} asChild defaultOpen={item.isActive} className="group/collapsible">
             <SidebarMenuItem>
               <CollapsibleTrigger asChild>
-                <SidebarMenuButton tooltip={item.title}>
-                  {item.icon && <item.icon />}
-                  <span>{item.title}</span>
-                  {item.items?.length && (
-                    <ChevronRight className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
-                  )}
+                <SidebarMenuButton tooltip={item.title} asChild>
+                  <Link to={item.url}>
+                    {item.icon && <item.icon />}
+                    <span>{t(item.title, { defaultValue: item.title })}</span>
+                    {item.items?.length && (
+                      <ChevronRight className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
+                    )}
+                  </Link>
                 </SidebarMenuButton>
               </CollapsibleTrigger>
               {item.items?.length && (
@@ -54,7 +58,7 @@ export function NavMain({
                       <SidebarMenuSubItem key={subItem.title}>
                         <SidebarMenuSubButton asChild>
                           <Link to={subItem.url}>
-                            <span>{subItem.title}</span>
+                            <span>{t(subItem.title, { defaultValue: subItem.title })}</span>
                           </Link>
                         </SidebarMenuSubButton>
                       </SidebarMenuSubItem>

@@ -7,7 +7,16 @@
   },
   "files": {
     "ignoreUnknown": false,
-    "ignore": ["node_modules/*", "vscode/*", "tsconfig.node.json", "tsconfig.app.json", "src/routeTree.gen.ts", ".git"]
+    "ignore": [
+      "node_modules/*",
+      "vscode/*",
+      "tsconfig.node.json",
+      "tsconfig.app.json",
+      "src/routeTree.gen.ts",
+      ".git",
+      "src/api/Api.ts",
+      "dist/*"
+    ]
   },
   "formatter": {
     "enabled": true,

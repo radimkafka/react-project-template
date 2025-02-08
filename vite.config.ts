@@ -16,6 +16,9 @@ export default defineConfig(({ command }) => ({
       },
     }),
   ],
+  server: {
+    open: true,
+  },
   base: command === "build" ? "/react-project-template/" : undefined,
   resolve: {
     alias: {

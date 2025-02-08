@@ -18,6 +18,10 @@ const data = {
       url: "/",
     },
     {
+      title: "Movies",
+      url: "/movies",
+    },
+    {
       title: "FoldableSection",
       url: "#",
       icon: SquareTerminal,
