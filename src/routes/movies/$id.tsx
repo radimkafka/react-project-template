@@ -10,11 +10,9 @@ import { useEffect } from "react";
 export const Route = createFileRoute("/movies/$id")({
   component: RouteComponent,
   errorComponent: ErrorComponent,
-  context: ({ params }) => ({
-    crumbs: params.id,
-  }),
-  loader: ({ context: { queryClient }, params: { id } }) => {
-    return queryClient.ensureQueryData(movieQueryOptions(id));
+  loader: async ({ context: { queryClient }, params: { id } }) => {
+    const data = await queryClient.ensureQueryData(movieQueryOptions(id));
+    return { data, crumb: data.Title };
   },
   pendingComponent: () => <Loader2 className="animate-spin" />,
 });

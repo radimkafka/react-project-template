@@ -1,3 +1,3 @@
 import type { Translations } from "@/types";
 
-export const createCrumbsContext = (crumbs: Translations) => () => ({ crumbs });
+export const createCrumbLoaderData = (crumb: Translations) => () => ({ crumb });

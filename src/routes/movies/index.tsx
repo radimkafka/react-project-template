@@ -5,17 +5,17 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { parseNumber } from "@/utils/number";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import { useMemo, useState } from "react";
+import { useState } from "react";
 
 export const Route = createFileRoute("/movies/")({
   component: RouteComponent,
-  context: () => ({
-    crumbs: "movies",
-  }),
+  // context: () => ({
+  //   crumb: undefined,
+  // }),
 });
 
 function RouteComponent() {
-  const navigate = useNavigate({ from: "/movies" });
+  const navigate = useNavigate({ from: "/movies/" });
   const [filter, setFilter] = useState({
     title: "batman",
     type: undefined as RecordType | undefined,
